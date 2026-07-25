@@ -29,6 +29,7 @@
                 <a href="#Alitas" class="hover:text-[#4D3823]0 transition">Alitas</a>
                 <a href="#Salchipapas" class="hover:text-[#4D3823] transition">Salchipapas</a>
                 <a href="#Perros" class="hover:text-[#4D3823] transition">Perros</a>
+                <a href="#Adicionales" class="hover:text-[#4D3823] transition">Adicionales</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <!-- Botón del Carrito con Contador -->
@@ -111,6 +112,20 @@
         <div class="text-center mt-8">
             <button id="btn-Perros" onclick="loadMore('Perros')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
                 Ver más Perros ▼
+            </button>
+        </div>
+    </section>
+
+     <!-- SECCIÓN 4: Adicionales -->
+    <section id="Adicionales" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100/50 rounded-3xl my-8">
+        <div class="mb-8 border-b pb-4">
+            <span class="text-orange-600 font-bold uppercase tracking-wider text-xs"></span>
+            <h2 class="text-3xl font-black tracking-tight text-[#4D3823]">🌭 Adicionales</h2>
+        </div>
+        <div id="grid-Adicionales" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-8">
+            <button id="btn-Adicionales" onclick="loadMore('Adicionales')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
+                Ver más Adicionales ▼
             </button>
         </div>
     </section>
@@ -211,6 +226,13 @@
                 { name: "Rústico", price: 17900, desc: "Cerdo, salchicha, pollo, chorizo artesanal, tocineta, queso fundido y maíz.", img: "rustico perro.jpg" },
                 { name: "Choriperro", price: 13900, desc: "Chorizo artesanal, queso gratinado, lechuga, papa chongo y salsas.", img: "" },
                 { name: "Pollo Crunchy", price: 13900, desc: "Pechuga en trozos, salchicha, queso gratinado, lechuga y papa chongo.", img: "pollo perro.jpg" }
+            ],
+            Adicionales: [
+                { name: "Queso gratinado", price: 5000,},
+                { name: "Porcion De Papa", price: 6000,},
+                { name: "Maiz", price: 4000,},
+                { name: "Chorizo", price: 4000,},
+                { name: "Tocineta", price: 4500,}
             ]
         };
 
