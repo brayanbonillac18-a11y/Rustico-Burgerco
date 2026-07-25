@@ -392,8 +392,8 @@
                 msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
             });
 
-            misg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
-
+           msg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
+           
             window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
         }
     </script>
