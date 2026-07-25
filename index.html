@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rustico Burger — Sabor que te acompaña</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .product-card { display: none; }
+        .product-card.visible { display: flex; }
+    </style>
+</head>
+<body class="bg-[#F8F1E7] text-gray-800 font-sans">
+    <!-- Barra Superior -->
+    <div class="bg-[#4D3823] text-white text-xs py-2 text-center font-medium">
+        🔥 ¡Efectivo o Transferencia! • Envíos rápidos • 100% Calidad Garantizada
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black tracking-wider text-[#4D3823]">Rustico Burger <span class="text-gray-900"></span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 font-medium text-sm text-gray-600">
+                <a href="#burgers" class="hover:text-[#4D3823] transition">Burgers</a>
+                <a href="#Alitas" class="hover:text-[#4D3823]0 transition">Alitas</a>
+                <a href="#Salchipapas" class="hover:text-[#4D3823] transition">Salchipapas</a>
+                <a href="#Perros" class="hover:text-[#4D3823] transition">Perros</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Botón del Carrito con Contador -->
+                <button onclick="toggleCartModal()" class="relative p-2 text-gray-700 hover:text-amber-800 focus:outline-none">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 bg-orange-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 text-white py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('fondopp.jpg');"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-xl">
+                <span class="bg-[#4D3823] text-white border border-[#4D3823] text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Comida a domicilio</span>
+                <h1 class="text-[#4D3823] sm:text-6xl font-black tracking-tight mt-4 mb-6 leading-none">
+                    LA FELICIDAD SABE A RUSTICO BURGER
+                </h1>
+                <p class="text-[#4D3823] text-lg mb-8">
+                    Jugoso. Crujiente. Recién hecho. Explora nuestras 4 secciones y pide tus favoritos.
+                </p>
+                <a href="#burgers" class="inline-block bg-[#4D3823] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#4D3823] transition shadow-lg shadow-[#4D3823]">
+                    Ver Menú Completo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1: BURGERS -->
+    <section id="burgers" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 border-b pb-4">
+            <span class="text-orange-600 font-bold uppercase tracking-wider text-xs"></span>
+            <h2 class="text-3xl font-black tracking-tight text-[#4D3823]">🍔 Burgers Con Papas</h2>
+        </div>
+        <div id="grid-burgers" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-8">
+            <button id="btn-burgers" onclick="loadMore('burgers')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
+                Ver más Burgers ▼
+            </button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: Alitas -->
+    <section id="Alitas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100/50 rounded-3xl my-8">
+        <div class="mb-8 border-b pb-4">
+            <span class="text-orange-600 font-bold uppercase tracking-wider text-xs"></span>
+            <h2 class="text-3xl font-black tracking-tight text-[#4D3823]"> Alitas</h2>
+        </div>
+        <div id="grid-Alitas" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-8">
+            <button id="btn-Alitas" onclick="loadMore('Alitas')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
+                Ver más Alitas ▼
+            </button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: Salchipapas -->
+    <section id="Salchipapas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 border-b pb-4">
+            <span class="text-orange-600 font-bold uppercase tracking-wider text-xs"></span>
+            <h2 class="text-3xl font-black tracking-tight text-[#4D3823]">🍟 Salchipapas </h2>
+        </div>
+        <div id="grid-Salchipapas" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-8">
+            <button id="btn-Salchipapas" onclick="loadMore('Salchipapas')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
+                Ver más Salchipapas▼
+            </button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: Perros -->
+    <section id="Perros" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100/50 rounded-3xl my-8">
+        <div class="mb-8 border-b pb-4">
+            <span class="text-orange-600 font-bold uppercase tracking-wider text-xs"></span>
+            <h2 class="text-3xl font-black tracking-tight text-[#4D3823]">🌭 Perros</h2>
+        </div>
+        <div id="grid-Perros" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-8">
+            <button id="btn-Perros" onclick="loadMore('Perros')" class="bg-orange-100 text-orange-700 hover:bg-orange-200 font-bold px-6 py-2.5 rounded-full text-sm transition shadow-sm">
+                Ver más Perros ▼
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-4 md:mb-0">
+                <span class="text-2xl font-black tracking-wider text-[#4D3823]">Rustico Burger<span class="text-white"></span></span>
+                <p class="text-gray-400 text-xs mt-1">El mejor sabor directo a tu puerta.</p>
+            </div>
+            <div class="text-gray-400 text-xs">
+                &copy; 2026 RUstico burger. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal del Carrito -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="font-black text-xl text-gray-900">Tu Pedido & Pago</h3>
+                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div id="cart-items" class="space-y-3 mb-4 max-h-36 overflow-y-auto">
+                <p class="text-sm text-gray-400 text-center py-4">Tu carrito está vacío</p>
+            </div>
+
+            <div class="border-t pt-3 mb-4 flex justify-between font-extrabold text-lg">
+                <span>Total a Pagar:</span>
+                <span id="cart-total" class="text-orange-600">$0</span>
+            </div>
+
+            <!-- Datos de Entrega -->
+            <div class="space-y-3 border-t pt-4">
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">Datos para la entrega:</label>
+                <input type="text" id="client-name" placeholder="Tu Nombre Completo" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+                <input type="text" id="client-address" placeholder="Dirección de Domicilio (Conjunto,Torre y Apto)" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+                <input type="text" id="client-notes" placeholder="Notas adicionales (Ej: Sin  verduras)" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+            </div>
+
+            <!-- Selección de Método de Pago -->
+            <div class="mt-4 border-t pt-4">
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Selecciona el Método de Pago:</label>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex items-center space-x-2 border rounded-xl p-3 cursor-pointer hover:border-orange-600 transition">
+                        <input type="radio" name="payment" value="Efectivo" checked onclick="togglePaymentInfo()" class="text-orange-600 focus:ring-orange-500">
+                        <span class="text-sm font-medium">💵 Efectivo</span>
+                    </label>
+                    <label class="flex items-center space-x-2 border rounded-xl p-3 cursor-pointer hover:border-orange-600 transition">
+                        <input type="radio" name="payment" value="Transferencia" onclick="togglePaymentInfo()" class="text-orange-600 focus:ring-orange-500">
+                        <span class="text-sm font-medium">📱 Transferencia</span>
+                    </label>
+                </div>
+
+                <!-- Caja de información bancaria (Oculta por defecto, se muestra al elegir transferencia) -->
+                <div id="transfer-info" class="hidden mt-3 bg-orange-50 border border-orange-200 rounded-2xl p-4 text-xs space-y-1.5 text-gray-700">
+                    <p class="font-bold text-orange-900 mb-1">Datos para Transferir:</p>
+                    <p>• <strong>Banco:</strong> Brebe / Nequi</p>
+                    <p>• <strong>Tipo de Cuenta:</strong> llave</p>
+                    <p>• <strong>Número:</strong> @ZBP436</p>
+                    <p class="text-orange-800 mt-2 font-medium">⚠️ Adjunta el comprobante por WhatsApp al enviar tu pedido.</p>
+                </div>
+            </div>
+
+            <button onclick="sendToWhatsApp()" class="w-full mt-6 bg-green-600 text-white font-bold py-3.5 rounded-2xl hover:bg-green-700 transition flex items-center justify-center space-x-2 shadow-lg">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Enviar Pedido por WhatsApp</span>
+            </button>
+        </div>
+    </div>
+    <!-- Lógica JavaScript con Descripciones Reducidas -->
+    <script>
+        const menuData = {
+            burgers: [
+                { name: "Argentina", price: 24900, desc: "Carne premium, chimichurri, chorizo argentino, salsa cheddar, tomate, lechuga.", img: "argentina.png" },
+                { name: "Sencilla Carne", price: 19900, desc: "Carne premium, lechuga, tomate, cebolla caramelizada, mozzarella y salsas.", img: "sencillah.jpg" },
+                { name: "Oklahoma", price: 22900, desc: "Carne sellada con cebolla caramelizada, cheddar fundido y tocineta ahumada.", img: "oklahoma.jpg" },
+                { name: "Crispy Onion", price: 22900, desc: "Carne premium, salsa BBQ especiada, doble tocineta, cheddar y cebolla crispy.", img: "crispy.jpg" },
+                { name: "Pollo Crunchy", price: 21900, desc: "Pollo crunchy, lechuga, tomate, cebolla caramelizada y queso mozzarella.", img: "p" }
+            ],
+            Alitas: [
+                { name: "Alitas BBQ", price: 21900, desc: "400g de alitas en salsa BBQ especiada con papas a la francesa.", img: "alitas.jpg" },
+                { name: "Alitas BBQ Picante", price: 22900, desc: "400g de alitas en salsa BBQ picante con papas a la francesa.", img: "alitas.jpg" },
+            ],
+            Salchipapas: [
+                { name: "Sencilla", price: 13900, desc: "Papas, salchicha, pollo, lechuga, queso gratinado y papa chongo.", img: "sencilla.jpg" },
+                { name: "Pollo", price: 20900, desc: "Papas, salchicha, pollo, lechuga, queso y papa chongo.", img: "mixta.png" },
+                { name: "Cerdo", price: 20900, desc: "Papas, salchicha, cerdo, lechuga, queso y papa chongo.", img: "mixta.png" },
+                { name: "Mixta", price: 22900, desc: "Papas, salchicha, pollo, cerdo, lechuga, queso gratinado y papa chongo.", img: "mixta.png" },
+                { name: "Salchipapa X2", price: 34900, desc: "Para 2 personas: papas, salchicha, pollo, cerdo, chorizo, tocineta y maíz.", img: "x2.png" },
+                { name: "Salchipapa X3", price: 46900, desc: "Para 3 personas: porción grande con carnes mixtas y extra queso.", img: "x3.png" },
+                { name: "Salchipapa X4", price: 59900, desc: "Para 4 personas: la gigante de la casa con todos los ingredientes.", img: "x4.jpg" }
+            ],
+            Perros: [
+                { name: "Rústico", price: 17900, desc: "Cerdo, salchicha, pollo, chorizo artesanal, tocineta, queso fundido y maíz.", img: "rustico perro.jpg" },
+                { name: "Choriperro", price: 13900, desc: "Chorizo artesanal, queso gratinado, lechuga, papa chongo y salsas.", img: "" },
+                { name: "Pollo Crunchy", price: 13900, desc: "Pechuga en trozos, salchicha, queso gratinado, lechuga y papa chongo.", img: "pollo perro.jpg" }
+            ]
+        };
+
+        // Empezamos mostrando solo 3 productos por sección
+        let visibleCount = { burgers: 2, pizzas: 2, bebidas: 2, postres: 2 }
+
+        function renderSection(sectionId) {
+            const grid = document.getElementById(`grid-${sectionId}`);
+            const btn = document.getElementById(`btn-${sectionId}`);
+            const items = menuData[sectionId];
+            const currentVisible = visibleCount[sectionId];
+
+            grid.innerHTML = '';
+
+            items.slice(0, currentVisible).forEach(item => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 bg-gray-200"><img src="${item.img}" class="w-full h-full object-cover"></div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mt-1 text-gray-900">${item.name}</h3>
+                                <p class="text-gray-500 text-xs mt-2">${item.desc}</p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0 flex items-center justify-between mt-4">
+                            <span class="font-extrabold text-lg text-gray-900">$${item.price.toLocaleString()}</span>
+                            <button onclick="addToCart('${item.name}', ${item.price})" class="bg-gray-900 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-orange-600 transition">Añadir</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const sectionName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+            
+            // Si ya se muestran todos, el botón cambia a "Ver menos"
+            if (currentVisible >= items.length) {
+                btn.innerHTML = `Ver menos ${sectionName} ▲`;
+                btn.classList.remove('bg-orange-100', 'text-orange-700');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            } else {
+                btn.innerHTML = `Ver más ${sectionName} ▼`;
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+                btn.classList.add('bg-orange-100', 'text-orange-700');
+            }
+        }
+
+        function loadMore(sectionId) {
+            const items = menuData[sectionId];
+            const currentVisible = visibleCount[sectionId];
+
+            if (currentVisible >= items.length) {
+                // Si ya están todos abiertos, al hacer clic se contrae a 2 y sube
+                visibleCount[sectionId] = 2;
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Con un solo clic muestra la cantidad total de productos de esa categoría
+                visibleCount[sectionId] = items.length;
+            }
+            renderSection(sectionId);
+        }
+
+        window.onload = function() {
+            Object.keys(menuData).forEach(sectionId => renderSection(sectionId));
+        };
+
+        let cart = [];
+
+        function addToCart(name, price) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const count = document.getElementById('cart-count');
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-400 text-center py-4">Tu carrito está vacío</p>';
+            } else {
+                container.innerHTML = '';
+                cart.forEach((item, index) => {
+                    totalCount += item.quantity;
+                    totalPrice += item.price * item.quantity;
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center text-sm border-b pb-2 mb-2">
+                            <div>
+                                <p class="font-bold text-gray-900">${item.name}</p>
+                                <p class="text-xs text-gray-500">Cant: ${item.quantity} x $${item.price.toLocaleString()}</p>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 text-xs hover:text-red-700 focus:outline-none px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+            }
+
+            count.innerText = totalCount;
+            totalEl.innerText = '$' + totalPrice.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            document.getElementById('cart-modal').classList.toggle('hidden');
+        }
+
+        function togglePaymentInfo() {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            const transferInfo = document.getElementById('transfer-info');
+            if (selectedPayment === 'Transferencia') {
+                transferInfo.classList.remove('hidden');
+            } else {
+                transferInfo.classList.add('hidden');
+            }
+        }
+
+        function sendToWhatsApp() {
+            const name = document.getElementById('client-name').value.trim();
+            const address = document.getElementById('client-address').value.trim();
+            const notes = document.getElementById('client-notes').value.trim();
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+           if (cart.length === 0) {
+                alert('Tu carrito está vacío.');
+                return;
+            }
+            if (!name || !address) {
+                alert('Por favor completa tu nombre y dirección de domicilio.');
+                return;
+            }
+
+            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}%0A`;
+            if (notes) {
+                msg += `*Notas:* ${notes}%0A`;
+            }
+            msg += `*Método de Pago:* ${paymentMethod}%0A%0A*Productos:*%0A`;
+            
+            let totalPrice = 0;
+
+            cart.forEach(i => {
+                let sub = i.price * i.quantity;
+                totalPrice += sub;
+                msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
+            });
+
+            misg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
+
+            window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
+        }
+    </script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyD_hzLqPKoxVGxNq1kyMwXm_PiDpxYjt28",
+    authDomain: "rusticoburger-29412.firebaseapp.com",
+    projectId: "rusticoburger-29412",
+    storageBucket: "rusticoburger-29412.firebasestorage.app",
+    messagingSenderId: "431354925157",
+    appId: "1:431354925157:web:70716f3966dc5341d2368c",
+    measurementId: "G-8NLBBC0H1N"
+  };
+
+  const app = initializeApp(firebaseConfig);
+        
+        // ¡Prueba esto!
+        console.log("🔥 ¡MI FIREBASE FUNCIONA PERFECTO!", app.name);
+</script>
+    </script>
+</body>
+</html>
