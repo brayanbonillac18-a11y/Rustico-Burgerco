@@ -1,0 +1,17 @@
+{
+  "name": "rustico-burgerco",
+  "version": "1.0.0",
+  "description": "Rustico Burger - Restaurant website with Vercel Analytics",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured for static HTML'"
+  },
+  "keywords": ["restaurant", "burger", "food", "vercel-analytics"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
