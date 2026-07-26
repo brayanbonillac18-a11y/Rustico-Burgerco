@@ -251,7 +251,6 @@
                 <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">Datos para la entrega:</label>
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
                 <input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
-                <select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600"></select>
 
 <input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
 <select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
@@ -520,7 +519,7 @@ let deliveryPrice = 0;
 function sendToWhatsApp() {
 
     const name = document.getElementById('client-name').value.trim();
-const addressEl = document.getElementById('client-address');
+    const addressEl = document.getElementById('client-address');
 
 if (!addressEl) {
     alert("No se encontró el campo Dirección.");
@@ -568,12 +567,12 @@ const address = addressEl.value.trim();
     totalPrice += deliveryPrice;
 
     msg += `%0A🚚 Domicilio: $${deliveryPrice.toLocaleString()}`;
-    msg += `%0A💰 TOTAL: $${totalPrice.toLocaleString()}`;
+    msg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
 
-    window.open(
-        `https://wa.me/573011392473?text=${msg}`,
-        '_blank'
-    );
+  window.open(
+    `https://wa.me/573011392473?text=${encodeURIComponent(msg)}`,
+    '_blank'
+);
     }
 
 
