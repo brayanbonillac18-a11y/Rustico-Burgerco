@@ -424,7 +424,16 @@
 const finalTotal = totalPrice + deliveryPrice;
 
 totalEl.innerText = '$' + finalTotal.toLocaleString();
-        }
+}
+
+function updateDelivery(){
+
+    deliveryPrice = Number(document.getElementById("delivery-zone").value);
+
+    updateCartUI();
+
+}
+        
 
         function removeFromCart(index) {
             cart.splice(index, 1);
