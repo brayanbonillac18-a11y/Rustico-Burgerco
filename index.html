@@ -400,7 +400,18 @@
             window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
         }
     </script>
-    
-    </script>
+<script>
+const popup = document.getElementById("popup");
+const cerrar = document.getElementById("cerrar");
+
+cerrar.onclick = () => {
+    popup.style.display = "none";
+};
+
+setTimeout(() => {
+    popup.style.display = "none";
+}, 5000);
+</script>
+
 </body>
 </html>
