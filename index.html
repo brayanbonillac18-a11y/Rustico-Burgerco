@@ -380,8 +380,8 @@
             const currentVisible = visibleCount[sectionId];
 
             if (currentVisible >= items.length) {
-                // Si ya están todos abiertos, al hacer clic se contrae a 1 y sube
-                visibleCount[sectionId] = 1;
+                // Si ya están todos abiertos, al hacer clic se contrae a 2 y sube
+                visibleCount[sectionId] = 2;
                 document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
             } else {
                 // Con un solo clic muestra la cantidad total de productos de esa categoría
