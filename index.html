@@ -228,6 +228,11 @@
             <div id="cart-items" class="space-y-3 mb-4 max-h-36 overflow-y-auto">
                 <p class="text-sm text-gray-400 text-center py-4">Tu carrito está vacío</p>
             </div>
+            <!-- NUEVO: Línea donde aparecerá el domicilio de forma dinámica -->
+            <div id="cart-delivery-line" class="hidden justify-between items-center text-sm border-b pb-2 mb-2 text-gray-700">
+                <span id="delivery-name-label" class="font-medium">Domicilio</span>
+                <span id="delivery-price-label" class="font-bold"></span>
+            </div>
 
             <div class="border-t pt-3 mb-4 flex justify-between font-extrabold text-lg">
                 <span>Total a Pagar:</span>
@@ -398,6 +403,10 @@ let deliveryPrice = 0;
             const count = document.getElementById('cart-count');
             const container = document.getElementById('cart-items');
             const totalEl = document.getElementById('cart-total');
+            const deliveryLine = document.getElementById('cart-delivery-line');
+            const deliveryNameLabel = document.getElementById('delivery-name-label');
+            const deliveryPriceLabel = document.getElementById('delivery-price-label');
+            const selectZone = document.getElementById('delivery-zone');
             let totalCount = 0;
             let totalPrice = 0;
 
