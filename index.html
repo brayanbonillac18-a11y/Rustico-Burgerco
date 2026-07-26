@@ -397,7 +397,7 @@
         let cart = [];
 let deliveryPrice = 0;
         // Función para mostrar el aviso flotante
-        function showToast(message) {
+        function showToast(message){ 
             const toast = document.getElementById('toast-notification');
             const toastMsg = document.getElementById('toast-message');
             
@@ -425,6 +425,7 @@ let deliveryPrice = 0;
         // LLAMAMOS AL AVISO FLOTANTE AQUÍ
             showToast(`¡Agregaste ${name} al pedido!`);
         }
+
 
         function updateCartUI() {
             const count = document.getElementById('cart-count');
