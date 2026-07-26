@@ -562,18 +562,18 @@ function sendToWhatsApp() {
             
             let totalPrice = 0;
 
-            cart.forEach(i => {
-                let sub = i.price * i.quantity;
-                totalPrice += sub;
-                msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
-            });
+cart.forEach(i => {
+    let sub = i.price * i.quantity;
+    totalPrice += sub;
+    msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
+});
 
-            misg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
+totalPrice += currentDeliveryPrice;
 
-            msg += '%0A*Total a Pagar:* $${totalPrice.toLocaleString()}';{
-                currentDeliveryPrice = deliveryPrice;
-            window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
-        }
+msg += `%0A🚚 Domicilio: $${currentDeliveryPrice.toLocaleString()}`;
+msg += `%0A💰 *Total a Pagar:* $${totalPrice.toLocaleString()}`;
+
+window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
     </script>
     <script>
 window.addEventListener("load", function () {
