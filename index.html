@@ -531,25 +531,12 @@ function sendToWhatsApp() {
                 alert('Tu carrito está vacío.');
                 return;
             }
-
-            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}`;
-            if (apto) {
-                msg += ` (${apto})`;
+             if (!name || !address) {
+                alert('Por favor completa tu nombre y dirección de domicilio.');
+                return;
             }
-            msg += `%0A`;
-
-            if (notes) {
-                msg += `*Notas:* ${notes}%0A`;
-            }
-            msg += `*Método de Pago:* ${paymentMethod}%0A%0A*Productos:*%0A`;
             
-            let totalPrice = 0;
-
-            cart.forEach(i => {
-                let sub = i.price * i.quantity;
-                totalPrice += sub;
-                msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
-            });
+        }
 
             // Captura segura del valor del domicilio según la zona seleccionada
             let currentDeliveryPrice = 0;
@@ -566,18 +553,25 @@ function sendToWhatsApp() {
                 currentDeliveryPrice = deliveryPrice;
             }
 
-            // Aquí se usan las comillas invertidas (`) obligatorias para que el texto interprete las variables
-            let msig = `*PEDIDO RÚSTICO BURGER*%0A%0A` +
-                      `👤 *Cliente:* ${name}%0A` +
-                      `🏠 *Dirección:* ${address}${apto ? ' (' + apto + ')' : ''}%0A` +
-                      `${notes ? '📝 *Notas:* ' + notes + '%0A' : ''}` +
-                      `💵 *Método de Pago:* ${paymentMethod}%0A%0A` +
-                      `🛒 *Productos:*%0A` +
-                      productsText +
-                      `${currentDeliveryPrice > 0 ? '%0A🚚 *' + zoneName + ':* $' + currentDeliveryPrice.toLocaleString() + '%0A' : ''}` +
-                      `%0A💰 *Total a Pagar:* $${totalPrice.toLocaleString()}`;
+  
+            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}%0A`;
+            if (notes) {
+                msg += `*Notas:* ${notes}%0A`;
+            }
+            msg += `*Método de Pago:* ${paymentMethod}%0A%0A*Productos:*%0A`;
+            
+            let totalPrice = 0;
 
-            msg += '%0A*Total a Pagar:* $${totalPrice.toLocaleString()}';
+            cart.forEach(i => {
+                let sub = i.price * i.quantity;
+                totalPrice += sub;
+                msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
+            });
+
+            misg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
+
+            msg += '%0A*Total a Pagar:* $${totalPrice.toLocaleString()}';{
+                currentDeliveryPrice = deliveryPrice;
             window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
         }
     </script>
