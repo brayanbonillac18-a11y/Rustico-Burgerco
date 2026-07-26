@@ -421,17 +421,16 @@ let deliveryPrice = 0;
             }
             }
 
-function updateDelivery() {
+        function updateDelivery() {
 
-    deliveryPrice = parseInt(document.getElementById("delivery-zone").value) || 0;
+                deliveryPrice = parseInt(document.getElementById("delivery-zone").value) || 0;
 
-    updateCartUI();
+                 updateCartUI();
 
 
             
-            
-
-           count.innerText = totalCount;
+        
+             count.innerText = totalCount;
 
             const finalTotal = totalPrice + deliveryPrice;
 
