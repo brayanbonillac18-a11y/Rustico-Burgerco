@@ -517,63 +517,66 @@ let deliveryPrice = 0;
         }
 
 function sendToWhatsApp() {
+            // Buscamos el campo de dirección probando varios IDs comunes para evitar errores
+            const addressEl = document.getElementById('client-address') || 
+                              document.getElementById('direccion') || 
+                              document.getElementById('address');
 
-    const name = document.getElementById('client-name').value.trim();
-    console.log(document.getElementById("client-address"));
-const addressEl = document.getElementById("client-address");
+            const nameEl = document.getElementById('client-name') || document.getElementById('nombre');
+            const aptoEl = document.getElementById('client-apto') || document.getElementById('apto');
+            const notesEl = document.getElementById('client-notes') || document.getElementById('notas');
+            const selectZone = document.getElementById('delivery-zone') || document.getElementById('zona');
+            const paymentInput = document.querySelector('input[name="payment"]:checked') || document.querySelector('input[name="pago"]:checked');
 
-if (!addressEl) {
-    alert("No se encontró el campo Dirección.");
-    return;
-}
+            const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : 'Cliente';
+            const address = addressEl && addressEl.value.trim() ? addressEl.value.trim() : 'No especificada';
+            const apto = aptoEl ? aptoEl.value.trim() : '';
+            const notes = notesEl ? notesEl.value.trim() : '';
+            const paymentMethod = paymentInput ? paymentInput.value : 'Efectivo';
 
-const address = addressEl.value.trim();
-    const apto = document.getElementById('client-apto').value.trim();
-    const notes = document.getElementById('client-notes').value.trim();
-    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío.');
+                return;
+            }
 
-    if (cart.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-    }
+            let totalPrice = 0;
+            let productsText = '';
 
-    if (!name || !address) {
-        alert('Por favor completa tu nombre y dirección.');
-        return;
-    }
+            cart.forEach(i => {
+                let sub = i.price * i.quantity;
+                totalPrice += sub;
+                productsText += `• ${i.quantity}x ${i.name} - $${sub.toLocaleString()}%0A`;
+            });
 
-    let msg = `*PEDIDO RÚSTICO BURGER*%0A`;
-    msg += `👤 Cliente: ${name}%0A`;
+            let currentDeliveryPrice = 0;
+            let zoneName = 'Domicilio';
+            
+            if (selectZone && selectZone.value) {
+                let valNum = parseFloat(selectZone.value);
+                if (!isNaN(valNum) && valNum > 0) {
+                    currentDeliveryPrice = valNum;
+                    zoneName = selectZone.options[selectZone.selectedIndex].text;
+                }
+            } else if (typeof deliveryPrice !== 'undefined' && deliveryPrice > 0) {
+                currentDeliveryPrice = deliveryPrice;
+            }
 
-    if (apto) {
-        msg += `🏢 Conjunto/Torre/Apto: ${apto}%0A`;
-    }
+            if (currentDeliveryPrice > 0) {
+                totalPrice += currentDeliveryPrice;
+            }
 
-    if (notes) {
-        msg += `📝 Notas: ${notes}%0A`;
-    }
+            let msg = `*PEDIDO RÚSTICO BURGER*%0A%0A` +
+                      `👤 *Cliente:* ${name}%0A` +
+                      `🏠 *Dirección:* ${address}${apto ? ' (' + apto + ')' : ''}%0A` +
+                      `${notes ? '📝 *Notas:* ' + notes + '%0A' : ''}` +
+                      `💵 *Método de Pago:* ${paymentMethod}%0A%0A` +
+                      `🛒 *Productos:*%0A` +
+                      productsText +
+                      `${currentDeliveryPrice > 0 ? '%0A🚚 *' + zoneName + ':* $' + currentDeliveryPrice.toLocaleString() + '%0A' : ''}` +
+                      `%0A💰 *Total a Pagar:* $${totalPrice.toLocaleString()}`;
 
-    msg += `💳 Pago: ${paymentMethod}%0A%0A`;
-    msg += `*PRODUCTOS*%0A`;
-
-    let totalPrice = 0;
-
-    cart.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        totalPrice += subtotal;
-
-        msg += `• ${item.quantity} x ${item.name} - $${subtotal.toLocaleString()}%0A`;
-    });
-
-    totalPrice += deliveryPrice;
-
-    msg += `%0A🚚 Domicilio: $${deliveryPrice.toLocaleString()}`;
-    msg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
-
-  window.open(
-    `https://wa.me/573011392473?text=${encodeURIComponent(msg)}`,
-    '_blank'
-);
+            window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
+        
     }
 
 
