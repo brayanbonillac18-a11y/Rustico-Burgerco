@@ -514,7 +514,6 @@ let deliveryPrice = 0;
         }
 
 function sendToWhatsApp() {
-            // Buscamos los elementos de manera segura para evitar errores si alguno no existe
             const nameEl = document.getElementById('client-name');
             const addressEl = document.getElementById('client-address');
             const aptoEl = document.getElementById('client-apto');
@@ -522,18 +521,14 @@ function sendToWhatsApp() {
             const selectZone = document.getElementById('delivery-zone');
             const paymentInput = document.querySelector('input[name="payment"]:checked');
 
-            const name = nameEl ? nameEl.value.trim() : '';
-            const address = addressEl ? addressEl.value.trim() : '';
+            const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : 'Cliente';
+            const address = addressEl && addressEl.value.trim() ? addressEl.value.trim() : 'No especificada';
             const apto = aptoEl ? aptoEl.value.trim() : '';
             const notes = notesEl ? notesEl.value.trim() : '';
             const paymentMethod = paymentInput ? paymentInput.value : 'Efectivo / Transferencia';
 
             if (cart.length === 0) {
                 alert('Tu carrito está vacío.');
-                return;
-            }
-            if (!name || !address) {
-                alert('Por favor completa tu nombre y dirección de domicilio.');
                 return;
             }
 
@@ -555,8 +550,8 @@ function sendToWhatsApp() {
                 totalPrice += sub;
                 msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
             });
+            
 
-            // Añadir el domicilio al mensaje de forma segura
             if (typeof deliveryPrice !== 'undefined' && deliveryPrice > 0 && selectZone) {
                 const selectedZoneText = selectZone.options[selectZone.selectedIndex].text;
                 msg += `%0A🚚 *Domicilio (${selectedZoneText}):* $${deliveryPrice.toLocaleString()}%0A`;
