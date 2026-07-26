@@ -382,6 +382,7 @@
         };
 
         let cart = [];
+let deliveryPrice = 0;
 
         function addToCart(name, price) {
             const item = cart.find(i => i.name === name);
@@ -421,19 +422,11 @@
 
            count.innerText = totalCount;
 
-const finalTotal = totalPrice + deliveryPrice;
+            const finalTotal = totalPrice + deliveryPrice;
 
-totalEl.innerText = '$' + finalTotal.toLocaleString();
-}
+            totalEl.innerText = '$' + finalTotal.toLocaleString();
 
-function updateDelivery(){
-
-    deliveryPrice = Number(document.getElementById("delivery-zone").value);
-
-    updateCartUI();
-
-}
-        
+        }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
