@@ -529,7 +529,7 @@ function sendToWhatsApp() {
             const paymentInput = document.querySelector('input[name="payment"]:checked') || document.querySelector('input[name="pago"]:checked');
 
             const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : 'Cliente';
-            const address = addressEl && addressEl.value.trim() ? addressEl.value.trim() : 'No especificada';
+            const address = addressEl && addressEl.value.trim() ? addressEl.value.trim() :'';
             const apto = aptoEl ? aptoEl.value.trim() : '';
             const notes = notesEl ? notesEl.value.trim() : '';
             const paymentMethod = paymentInput ? paymentInput.value : 'Efectivo';
