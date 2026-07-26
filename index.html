@@ -396,24 +396,29 @@
 
         let cart = [];
 let deliveryPrice = 0;
-// Función simplificada para mostrar el aviso
+// Función inmediata para mostrar el aviso
         function showToast(message) {
             const toast = document.getElementById('toast-notification');
             const toastMsg = document.getElementById('toast-message');
             
-            toastMsg.innerText = message;
-            
-            // Forzar aparición inmediata
-            toast.style.display = 'flex';
-            
-            // Ocultarlo automáticamente después de 2.5 segundos
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2500);
+            if (toast && toastMsg) {
+                toastMsg.innerText = message;
+                toast.style.display = 'flex';
+                
+                // Limpiamos cualquier temporizador anterior si se hace clic muy rápido
+                if (window.toastTimeout) clearTimeout(window.toastTimeout);
+                
+                // Ocultarlo después de 5 segundos
+                window.toastTimeout = setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 5000);
+            }
         }
 
-        // Función addToCart conectada
+        // Función addToCart (ejecuta el aviso al instante)
         function addToCart(name, price) {
+            // EL AVISO APARECE DE INMEDIATO AL HACER CLIC
+           showToast("¡Agregaste " + name + " al pedido!");
             const item = cart.find(i => i.name === name);
             if (item) {
                 item.quantity++;
@@ -421,9 +426,6 @@ let deliveryPrice = 0;
                 cart.push({ name, price, quantity: 1 });
             }
             updateCartUI();
-            
-            // Llama al aviso flotante
-            showToast(`¡Agregaste ${name} al pedido!`);
         }
 
 
