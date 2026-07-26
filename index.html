@@ -516,8 +516,14 @@ let deliveryPrice = 0;
 function sendToWhatsApp() {
 
     const name = document.getElementById('client-name').value.trim();
-  const addressEl = document.getElementById('client-address');
-console.log(addressEl);
+const addressEl = document.getElementById('client-address');
+
+if (!addressEl) {
+    alert("No se encontró el campo Dirección.");
+    return;
+}
+
+const address = addressEl.value.trim();
     const apto = document.getElementById('client-apto').value.trim();
     const notes = document.getElementById('client-notes').value.trim();
     const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
