@@ -430,6 +430,17 @@ let deliveryPrice = 0;
             }
    
              count.innerText = totalCount;
+             // Mostrar u ocultar la línea del domicilio debajo de los productos
+            if (deliveryPrice > 0 && selectZone) {
+                const selectedOptionText = selectZone.options[selectZone.selectedIndex].text;
+                deliveryNameLabel.innerText = "🚚 " + selectedOptionText.split(" - ")[0]; // Ej: Zona 1
+                deliveryPriceLabel.innerText = "$" + deliveryPrice.toLocaleString();
+                deliveryLine.classList.remove('hidden');
+                deliveryLine.classList.add('flex');
+            } else {
+                deliveryLine.classList.remove('flex');
+                deliveryLine.classList.add('hidden');
+            }
 
             const finalTotal = totalPrice + deliveryPrice;
 
