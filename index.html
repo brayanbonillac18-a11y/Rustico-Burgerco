@@ -252,7 +252,7 @@
                 <input type="text" id="client-name" placeholder="Nombre Completo" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
                 <input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
 
-                
+
 <select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
 <option value="0">🚚 Selecciona el domicilio</option>
 <option value="1000">Coralina- $1.000</option>
@@ -563,6 +563,12 @@ function sendToWhatsApp() {
 
             if (currentDeliveryPrice > 0) {
                 totalPrice += currentDeliveryPrice;
+            }
+            let addressLine = '';
+            if (address && address !== 'No especificada') {
+                addressLine = address + (apto ? ` (${apto})` : '');
+            } else if (apto) {
+                addressLine = apto;
             }
             
             let msg = `*PEDIDO RÚSTICO BURGER*%0A%0A` +
