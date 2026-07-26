@@ -569,7 +569,7 @@ function sendToWhatsApp() {
             // Si hay un valor de domicilio válido, lo añade al mensaje y al total
             if (currentDeliveryPrice > 0) {
                 let zoneName = selectZone && selectZone.selectedIndex >= 0 ? selectZone.options[selectZone.selectedIndex].text : 'Envío';
-                msg += `%0A🚚 *${zoneName}:* $${currentDeliveryPrice.toLocaleString()}%0A`;
+                msg += '%0A🚚 *${zoneName}:* $${currentDeliveryPrice.toLocaleString()}%0A';
                 totalPrice += currentDeliveryPrice;
             }
 
