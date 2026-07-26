@@ -226,6 +226,11 @@
                 <h3 class="font-black text-xl text-gray-900">Tu Pedido & Pago</h3>
                 <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
+            <!-- Notificación flotante de producto agregado -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 bg-gray-900 text-white text-sm px-4 py-3 rounded-2xl shadow-xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
+        <i class="fa-solid fa-check-circle text-green-400"></i>
+        <span id="toast-message">¡Producto agregado al carrito!</span>
+    </div>
             
             <div id="cart-items" class="space-y-3 mb-4 max-h-36 overflow-y-auto">
                 <p class="text-sm text-gray-400 text-center py-4">Tu carrito está vacío</p>
@@ -375,8 +380,8 @@
             const currentVisible = visibleCount[sectionId];
 
             if (currentVisible >= items.length) {
-                // Si ya están todos abiertos, al hacer clic se contrae a 2 y sube
-                visibleCount[sectionId] = 2;
+                // Si ya están todos abiertos, al hacer clic se contrae a 1 y sube
+                visibleCount[sectionId] = 1;
                 document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
             } else {
                 // Con un solo clic muestra la cantidad total de productos de esa categoría
@@ -391,6 +396,22 @@
 
         let cart = [];
 let deliveryPrice = 0;
+        // Función para mostrar el aviso flotante
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerText = message;
+            
+            // Mostrar la notificación (sube y aparece)
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            // Ocultarla automáticamente después de 2.5 segundos
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
 
         function addToCart(name, price) {
             const item = cart.find(i => i.name === name);
@@ -400,6 +421,9 @@ let deliveryPrice = 0;
                 cart.push({ name, price, quantity: 1 });
             }
             updateCartUI();
+        }
+        // LLAMAMOS AL AVISO FLOTANTE AQUÍ
+            showToast(`¡Agregaste ${name} al pedido!`);
         }
 
         function updateCartUI() {
