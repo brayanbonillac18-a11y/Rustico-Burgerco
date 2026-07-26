@@ -419,6 +419,16 @@ let deliveryPrice = 0;
                     `;
                 });
             }
+            }
+
+function updateDelivery() {
+
+    deliveryPrice = parseInt(document.getElementById("delivery-zone").value) || 0;
+
+    updateCartUI();
+
+}
+            
 
            count.innerText = totalCount;
 
@@ -426,16 +436,8 @@ let deliveryPrice = 0;
 
             totalEl.innerText = '$' + finalTotal.toLocaleString();
 
-        }
-        function updateDelivery() {
+        
 
-    deliveryPrice = parseInt(document.getElementById("delivery-zone").value) || 0;
-
-    console.log("Domicilio:", deliveryPrice);
-
-    updateCartUI();
-
-}
 
         function removeFromCart(index) {
             cart.splice(index, 1);
