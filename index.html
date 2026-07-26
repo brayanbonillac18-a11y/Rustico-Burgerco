@@ -401,16 +401,20 @@
         }
     </script>
 <script>
-const popup = document.getElementById("popup");
-const cerrar = document.getElementById("cerrar");
+window.addEventListener("load", function () {
 
-cerrar.onclick = () => {
-    popup.style.display = "none";
-};
+    const popup = document.getElementById("popup");
+    const cerrar = document.getElementById("cerrar");
 
-setTimeout(() => {
-    popup.style.display = "none";
-}, 5000);
+    cerrar.onclick = function () {
+        popup.style.display = "none";
+    };
+
+    setTimeout(function () {
+        popup.style.display = "none";
+    }, 5000);
+
+});
 </script>
 
 </body>
