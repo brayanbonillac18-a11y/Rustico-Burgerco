@@ -234,11 +234,20 @@
                 <span id="cart-total" class="text-orange-600">$0</span>
             </div>
 
-            <!-- Datos de Entrega -->
+<!-- Datos de Entrega -->
             <div class="space-y-3 border-t pt-4">
                 <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">Datos para la entrega:</label>
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
-                <input type="text" id="client-address" placeholder="Dirección de Domicilio (Conjunto,Torre y Apto)" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+                <input type="text" id="client-address" placeholder="Dirección" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+<input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+<select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+<option value="0">🚚 Selecciona el domicilio</option>
+<option value="3000">Zona 1 - $3.000</option>
+<option value="4000">Zona 2 - $4.000</option>
+<option value="5000">Zona 3 - $5.000</option>
+<option value="6000">Zona 4 - $6.000</option>
+<option value="7000">Zona 5 - $7.000</option>
+</select>
                 <input type="text" id="client-notes" placeholder="Notas adicionales (Ej: Sin  verduras)" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
             </div>
 
