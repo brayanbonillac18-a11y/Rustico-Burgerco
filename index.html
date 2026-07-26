@@ -250,6 +250,8 @@
             <div class="space-y-3 border-t pt-4">
                 <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide">Datos para la entrega:</label>
                 <input type="text" id="client-name" placeholder="Tu Nombre Completo" class="w-full text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+                <input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
+                <select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600"></select>
 
 <input type="text" id="client-apto" placeholder="Conjunto, Torre y Apto" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
 <select id="delivery-zone" onchange="updateDelivery()" class="w-full mt-3 text-sm border rounded-xl px-3 py-2.5 focus:outline-none focus:border-orange-600">
@@ -487,9 +489,11 @@ let deliveryPrice = 0;
         }
         function updateDelivery() {
 
-    deliveryPrice = parseInt(document.getElementById("delivery-zone").value) || 0;
+            deliveryPrice = Number(document.getElementById("delivery-zone").value);
+ 
+            updateCartUI();
 
-    updateCartUI();
+
 
 }
 
