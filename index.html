@@ -419,8 +419,11 @@
                 });
             }
 
-            count.innerText = totalCount;
-            totalEl.innerText = '$' + totalPrice.toLocaleString();
+           count.innerText = totalCount;
+
+const finalTotal = totalPrice + deliveryPrice;
+
+totalEl.innerText = '$' + finalTotal.toLocaleString();
         }
 
         function removeFromCart(index) {
