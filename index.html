@@ -514,66 +514,56 @@ let deliveryPrice = 0;
         }
 
 function sendToWhatsApp() {
-            const nameEl = document.getElementById('client-name');
-            const addressEl = document.getElementById('client-address');
-            const aptoEl = document.getElementById('client-apto');
-            const notesEl = document.getElementById('client-notes');
-            const selectZone = document.getElementById('delivery-zone');
-            const paymentInput = document.querySelector('input[name="payment"]:checked');
 
-            const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : 'Cliente';
-            const address = addressEl && addressEl.value.trim() ? addressEl.value.trim() : 'No especificada';
-            const apto = aptoEl ? aptoEl.value.trim() : '';
-            const notes = notesEl ? notesEl.value.trim() : '';
-            const paymentMethod = paymentInput ? paymentInput.value : 'Efectivo / Transferencia';
+    const name = document.getElementById('client-name').value.trim();
+    const address = document.getElementById('client-address').value.trim();
+    const apto = document.getElementById('client-apto').value.trim();
+    const notes = document.getElementById('client-notes').value.trim();
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
 
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío.');
-                return;
-            }
-             if (!name || !address) {
-                alert('Por favor completa tu nombre y dirección de domicilio.');
-                return;
-            }
-            
-        }
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+    }
 
-            // Captura segura del valor del domicilio según la zona seleccionada
-            let currentDeliveryPrice = 0;
-            if (selectZone && selectZone.value) {
-                // Intenta obtener el precio directamente del valor de la opción seleccionada (si el value es el número)
-                let valNum = parseFloat(selectZone.value);
-                if (!isNaN(valNum) && valNum > 0) {
-                    currentDeliveryPrice = valNum;
-                } else if (typeof deliveryPrice !== 'undefined') {
-                    // Si usas una variable global deliveryPrice
-                    currentDeliveryPrice = deliveryPrice;
-                }
-            } else if (typeof deliveryPrice !== 'undefined') {
-                currentDeliveryPrice = deliveryPrice;
-            }
+    if (!name || !address) {
+        alert('Por favor completa tu nombre y dirección.');
+        return;
+    }
 
-  
-            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}%0A`;
-            if (notes) {
-                msg += `*Notas:* ${notes}%0A`;
-            }
-            msg += `*Método de Pago:* ${paymentMethod}%0A%0A*Productos:*%0A`;
-            
-            let totalPrice = 0;
+    let msg = `*PEDIDO RÚSTICO BURGER*%0A`;
+    msg += `👤 Cliente: ${name}%0A`;
 
-cart.forEach(i => {
-    let sub = i.price * i.quantity;
-    totalPrice += sub;
-    msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
-});
+    if (apto) {
+        msg += `🏢 Conjunto/Torre/Apto: ${apto}%0A`;
+    }
 
-totalPrice += currentDeliveryPrice;
+    if (notes) {
+        msg += `📝 Notas: ${notes}%0A`;
+    }
 
-msg += `%0A🚚 Domicilio: $${currentDeliveryPrice.toLocaleString()}`;
-msg += `%0A💰 *Total a Pagar:* $${totalPrice.toLocaleString()}`;
+    msg += `💳 Pago: ${paymentMethod}%0A%0A`;
+    msg += `*PRODUCTOS*%0A`;
 
-window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        totalPrice += subtotal;
+
+        msg += `• ${item.quantity} x ${item.name} - $${subtotal.toLocaleString()}%0A`;
+    });
+
+    totalPrice += deliveryPrice;
+
+    msg += `%0A🚚 Domicilio: $${deliveryPrice.toLocaleString()}`;
+    msg += `%0A💰 TOTAL: $${totalPrice.toLocaleString()}`;
+
+    window.open(
+        `https://wa.me/573011392473?text=${msg}`,
+        '_blank'
+    );
+
     </script>
     <script>
 window.addEventListener("load", function () {
