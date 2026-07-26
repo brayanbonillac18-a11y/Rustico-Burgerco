@@ -436,7 +436,7 @@ let deliveryPrice = 0;
             updateCartUI();
         }
 
-        
+
         function updateCartUI() {
             const count = document.getElementById('cart-count');
             const container = document.getElementById('cart-items');
@@ -513,15 +513,22 @@ let deliveryPrice = 0;
             }
         }
 
-        function sendToWhatsApp() {
-            const name = document.getElementById('client-name').value.trim();
-            const address = document.getElementById('client-address').value.trim();
-            const apto = document.getElementById('client-apto').value.trim(); // Capturamos el conjunto/apto
-            const notes = document.getElementById('client-notes').value.trim();
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+function sendToWhatsApp() {
+            // Buscamos los elementos de manera segura para que nunca den error si falta alguno
+            const nameEl = document.getElementById('client-name');
+            const addressEl = document.getElementById('client-address');
+            const aptoEl = document.getElementById('client-apto');
+            const notesEl = document.getElementById('client-notes');
             const selectZone = document.getElementById('delivery-zone');
+            const paymentInput = document.querySelector('input[name="payment"]:checked');
 
-           if (cart.length === 0) {
+            const name = nameEl ? nameEl.value.trim() : '';
+            const address = addressEl ? addressEl.value.trim() : '';
+            const apto = aptoEl ? aptoEl.value.trim() : '';
+            const notes = notesEl ? notesEl.value.trim() : '';
+            const paymentMethod = paymentInput ? paymentInput.value : 'Efectivo / Transferencia';
+
+            if (cart.length === 0) {
                 alert('Tu carrito está vacío.');
                 return;
             }
@@ -530,7 +537,12 @@ let deliveryPrice = 0;
                 return;
             }
 
-            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}%0A`;
+            let msg = `*PEDIDO RÚSTICO BURGER*%0A*Cliente:* ${name}%0A*Dirección:* ${address}`;
+            if (apto) {
+                msg += ` (${apto})`;
+            }
+            msg += `%0A`;
+
             if (notes) {
                 msg += `*Notas:* ${notes}%0A`;
             }
@@ -543,14 +555,15 @@ let deliveryPrice = 0;
                 totalPrice += sub;
                 msg += `- ${i.quantity}x ${i.name} ($${sub.toLocaleString()})%0A`;
             });
-            // Añadir el domicilio al mensaje si se seleccionó una zona válida
-            if (deliveryPrice > 0 && selectZone) {
+
+            // Añadir el domicilio al mensaje de forma segura
+            if (typeof deliveryPrice !== 'undefined' && deliveryPrice > 0 && selectZone) {
                 const selectedZoneText = selectZone.options[selectZone.selectedIndex].text;
                 msg += `%0A🚚 *Domicilio (${selectedZoneText}):* $${deliveryPrice.toLocaleString()}%0A`;
-                totalPrice += deliveryPrice; // Sumar el domicilio al total general
+                totalPrice += deliveryPrice;
             }
 
-           msg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
+            msg += `%0A*Total a Pagar:* $${totalPrice.toLocaleString()}`;
             window.open(`https://wa.me/573011392473?text=${msg}`, '_blank');
         }
     </script>
