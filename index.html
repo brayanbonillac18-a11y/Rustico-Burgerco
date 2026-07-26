@@ -519,7 +519,8 @@ let deliveryPrice = 0;
 function sendToWhatsApp() {
 
     const name = document.getElementById('client-name').value.trim();
-    const addressEl = document.getElementById('client-address');
+    console.log(document.getElementById("client-address"));
+const addressEl = document.getElementById("client-address");
 
 if (!addressEl) {
     alert("No se encontró el campo Dirección.");
@@ -574,7 +575,7 @@ const address = addressEl.value.trim();
     '_blank'
 );
     }
-    
+
 
     </script>
     console.log("SCRIPT CARGADO");
