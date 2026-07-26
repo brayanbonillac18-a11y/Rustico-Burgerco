@@ -396,26 +396,35 @@
 
         let cart = [];
 let deliveryPrice = 0;
-// Función que hace aparecer el aviso en la pantalla
+// 1. Función para mostrar el aviso flotante en pantalla
         function showToast(message) {
-            const toast = document.getElementById('toast-notification');
-            const toastMsg = document.getElementById('toast-message');
+            let toast = document.getElementById('toast-notification');
             
-            if (toast && toastMsg) {
-                toastMsg.innerText = message;
-                toast.style.display = 'flex'; // Lo hace visible al instante
-                
-                if (window.toastTimeout) clearTimeout(window.toastTimeout);
-                
-                // Se oculta solo después de 2.5 segundos
-                window.toastTimeout = setTimeout(() => {
-                    toast.style.display = 'none';
-                }, 2500);
+            // Si por alguna razón el HTML no tiene el div, lo creamos automáticamente
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast-notification';
+                toast.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #111827; color: #fff; padding: 12px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 999999; display: flex; font-size: 14px; font-weight: 500; align-items: center; gap: 8px;';
+                toast.innerHTML = '<i class="fa-solid fa-check-circle" style="color: #4ade80;"></i><span id="toast-message">¡Producto agregado!</span>';
+                document.body.appendChild(toast);
             }
+            
+            const toastMsg = document.getElementById('toast-message');
+            if (toastMsg) toastMsg.innerText = message;
+            
+            toast.style.display = 'flex';
+            
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            
+            // Se oculta solo después de 2.5 segundos
+            window.toastTimeout = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2500);
         }
 
-        // Función al hacer clic en Añadir
+        // 2. Función original de añadir al carrito actualizada
         function addToCart(name, price) {
+            // Muestra el mensaje al instante en la pantalla al hacer clic en el producto
             showToast("¡Agregaste " + name + " al pedido!");
 
             const item = cart.find(i => i.name === name);
@@ -427,7 +436,7 @@ let deliveryPrice = 0;
             updateCartUI();
         }
 
-
+        
         function updateCartUI() {
             const count = document.getElementById('cart-count');
             const container = document.getElementById('cart-items');
