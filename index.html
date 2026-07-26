@@ -478,8 +478,10 @@ let deliveryPrice = 0;
         function sendToWhatsApp() {
             const name = document.getElementById('client-name').value.trim();
             const address = document.getElementById('client-address').value.trim();
+            const apto = document.getElementById('client-apto').value.trim(); // Capturamos el conjunto/apto
             const notes = document.getElementById('client-notes').value.trim();
             const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const selectZone = document.getElementById('delivery-zone');
 
            if (cart.length === 0) {
                 alert('Tu carrito está vacío.');
