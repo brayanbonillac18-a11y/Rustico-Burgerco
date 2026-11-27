@@ -351,12 +351,14 @@
                     <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-gray-100 flex flex-col justify-between">
                         <div>
                             <div class="h-48 w-full overflow-hidden rounded-t-2xl bg-gray-200">
+   <div class="h-48 w-full overflow-hidden rounded-t-2xl bg-gray-900 flex items-center justify-center">
     <img
         src="${item.img}"
         alt="${item.name}"
-        class="w-full h-full object-cover object-center"
+        class="w-full h-full object-contain"
         loading="lazy"
     >
+</div>
 </div>
                             <div class="p-5">
                                 <h3 class="font-bold text-lg mt-1 text-gray-900">${item.name}</h3>
